@@ -18,7 +18,8 @@ Do not optimise for detector scores. Do not fabricate anecdotes, citations, sour
 ## Modes
 
 - `rewrite` — default. Return a ready-to-use revision.
-- `audit` — flag the signals without rewriting.
+- `audit` / `detect` — flag the signals without rewriting.
+- `edit` — edit a supplied file in place only when the user explicitly asks for a file edit.
 - `voice-match` — use a supplied writing sample to preserve the author's vocabulary, rhythm, paragraph openings, punctuation, and degree of warmth.
 - `academic-safe` — use for papers, abstracts, grants, peer-review responses, and medical or technical text. Preserve the field's formal register and calibrate every claim to its evidence.
 - `translation-naturalise` — rewrite Chinese–English or English–Chinese translation so it follows the target language's normal argument and sentence logic rather than mirroring the source line by line.
@@ -93,7 +94,15 @@ State the decision, request, or boundary in the first two sentences. Keep only t
 
 ## Pattern Reference
 
-Read [AI writing signals](references/ai-patterns.md) for a phrase-level audit, a long text, or a request to explain why a draft feels AI-generated. Treat individual flags as editing signals, not automatic bans. A cluster of signals is stronger evidence than one word or one em dash.
+Read [AI-ish lexicon](references/ai-lexicon.md) for phrase-level diagnosis, a long text, or a request to add an AI-like word or phrase to the rule set.
+
+Read [AI-ish structure patterns](references/ai-structure-patterns.md) when paragraphs feel too smooth, generic, repetitive, or template-driven.
+
+Read [Formatting and attribution artifacts](references/ai-formatting-artifacts.md) when the text includes Markdown, headings, bullets, citations, quotations, documentation prose, or pasted chat output.
+
+Treat individual flags as editing signals, not automatic bans. A cluster of signals is stronger evidence than one word, transition, heading, or em dash. Use the severity labels as follows: `high` usually merits revision unless terminology requires it; `medium` merits revision when repeated, vague, or unsupported; `low` is context-dependent.
+
+When the user asks to record a new phrase, structural pattern, or formatting tell, make the smallest useful update to the relevant reference file. Include why it can sound AI-like and when it may still be appropriate.
 
 ## Voice Calibration
 
@@ -127,6 +136,8 @@ For `audit`, group no more than eight findings under: **phrasing**, **structure*
 For `voice-match`, return the revision followed by up to three brief observations about the retained voice. Do not imitate a supplied sample beyond its observable style.
 
 For `source-safe`, return a concise issue list with: **claim or phrase**, **why it needs support**, and **safe edit or verification step**. Do not substitute an invented source or fact.
+
+For `edit`, update only the requested file and report the edited path. Preserve unrelated content and formatting.
 
 ## Final Check
 
