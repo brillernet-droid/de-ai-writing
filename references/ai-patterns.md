@@ -53,3 +53,13 @@ Use this as a warning list, not a ban list. Revise only when a phrase is vague, 
 - Remove excessive bold-label bullets, generic headings (`Overview`, `Key points`, `Takeaways`), decorative emoji, needless horizontal rules, and tables used where two sentences would be clearer.
 - Verify dates, studies, authorities, quotations, and citations. Plausible but unsourced specifics are more damaging than plain uncertainty.
 - Keep formatting that serves the reader or is required by the target venue.
+
+## Translation And Authorship Signals
+
+- A translated sentence retains every source-language noun phrase but loses a clear main verb in the target language.
+- Chinese prose uses English-style subject chains, repeated `其`, or passive constructions when a direct verb would be clearer.
+- English prose repeats abstract nouns such as `development`, `importance`, `significance`, and `improvement` without an actor or mechanism.
+- A paragraph sounds personal only because it adds a generic claim such as `I have always been passionate about …`; ask for a real detail or omit it.
+- A draft uses `experts`, `research`, `reports`, or an exact statistic without an attributable source.
+
+Better move: preserve the supplied fact, source, or personal detail; otherwise write a narrower sentence, flag the gap, or leave a placeholder for the author to complete.

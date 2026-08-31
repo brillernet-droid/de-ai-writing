@@ -7,10 +7,11 @@ description: Revise Chinese or English prose to remove AI-like wording, formulai
 
 ## Objective
 
-Make the writing sound authored: specific, purposeful, rhythmically natural, and appropriate to its genre. Edit for two independent failures:
+Make the writing sound authored: specific, purposeful, rhythmically natural, and appropriate to its genre. Edit for three independent failures:
 
 1. **Defensive writing** — apology-like caveats, self-undermining claims, negative framing, and explanation added only to pre-empt imagined criticism.
 2. **AI-like writing** — stock vocabulary, generic structure, empty emphasis, over-balanced sentences, chatbot formatting, and uniformly polished rhythm.
+3. **Ungrounded writing** — vague authorities, unsupported specificity, literal translation, and generic claims that conceal the writer's actual evidence or point of view.
 
 Do not optimise for detector scores. Do not fabricate anecdotes, citations, sources, personal details, quirks, or errors. Preserve all facts, numbers, technical terms, intended stance, and material uncertainty.
 
@@ -20,6 +21,8 @@ Do not optimise for detector scores. Do not fabricate anecdotes, citations, sour
 - `audit` — flag the signals without rewriting.
 - `voice-match` — use a supplied writing sample to preserve the author's vocabulary, rhythm, paragraph openings, punctuation, and degree of warmth.
 - `academic-safe` — use for papers, abstracts, grants, peer-review responses, and medical or technical text. Preserve the field's formal register and calibrate every claim to its evidence.
+- `translation-naturalise` — rewrite Chinese–English or English–Chinese translation so it follows the target language's normal argument and sentence logic rather than mirroring the source line by line.
+- `source-safe` — flag claims, attributions, dates, quotations, or citations that cannot be supported from the supplied material; do not invent replacements.
 
 ## Editing Intensity
 
@@ -48,8 +51,15 @@ Do not alter quoted language, citations, reference details, numerical results, s
    - Prefer actors, mechanisms, objects, dates, evidence, and specific consequences.
    - Break formulaic symmetry and vary sentence and paragraph length according to the work each part does.
    - Remove chatbot prefaces, sign-offs, and over-organised formatting.
-5. Rebuild the argument around an appropriate structure: claim-first, evidence-first, problem–constraint–choice, finding–limitation–meaning, objection–answer, or chronology.
-6. Run the **calibration pass** and return the requested output.
+5. Run the **authorship pass**:
+   - If a writing sample is supplied, retain its observable habits: sentence length, plain-word preference, transitions, punctuation, degree of warmth, and treatment of uncertainty.
+   - Replace generic abstractions with supplied actors, evidence, scenes, decisions, mechanisms, or consequences.
+   - If the draft lacks a needed personal or concrete detail, flag the gap or use a clearly marked placeholder. Never invent it.
+6. Run the **source pass**:
+   - Replace vague attributions such as `experts argue` or `studies show` only when a supplied source supports the replacement.
+   - Flag unsourced dates, quotations, studies, names, and statistics for verification. Do not make factual claims sound firmer merely because the prose is cleaner.
+7. Rebuild the argument around an appropriate structure: claim-first, evidence-first, problem–constraint–choice, finding–limitation–meaning, objection–answer, or chronology.
+8. Run the **calibration pass** and return the requested output.
 
 ## Precision And Claim Calibration
 
@@ -75,7 +85,7 @@ Replace empty praise such as `robust`, `seamless`, `transformative`, `赋能`, o
 
 ### Chinese–English translation
 
-Preserve the author's logic and degree of directness. Do not flatten Chinese-specific phrasing into generic global-English copy, and do not make Chinese prose read like a translated corporate deck.
+Preserve the author's logic and degree of directness, then rebuild sentences for the target language rather than translating word by word. In English, restore a clear subject and main verb, reduce stacked noun phrases, and replace generic importance claims with the actual finding or action. In Chinese, avoid rigid translation of English subject chains, excessive passive constructions, and corporate-deck wording. Preserve named entities, terminology, citations, numbers, and deliberately distinctive phrasing.
 
 ### Emails and professional messages
 
@@ -85,6 +95,29 @@ State the decision, request, or boundary in the first two sentences. Keep only t
 
 Read [AI writing signals](references/ai-patterns.md) for a phrase-level audit, a long text, or a request to explain why a draft feels AI-generated. Treat individual flags as editing signals, not automatic bans. A cluster of signals is stronger evidence than one word or one em dash.
 
+## Voice Calibration
+
+When the user supplies a writing sample, derive a compact in-session profile before rewriting:
+
+- preferred sentence length and paragraph shape;
+- plain or technical vocabulary level;
+- recurring sentence openings and transition habits;
+- punctuation, formatting, and use of first person;
+- how the writer expresses certainty, uncertainty, warmth, and disagreement.
+
+Use the profile as positive guidance, not a disguise. Do not imitate a living writer's distinctive voice beyond the user's supplied samples, and do not store private samples in the public repository.
+
+When no sample is supplied, default to clear, specific prose with a natural cadence. Do not add humor, slang, contractions, personal stories, or deliberate imperfections unless the genre supports them.
+
+## Source-Safe Editing
+
+Treat prose cleanup and factual verification as separate jobs. When sources are supplied, check whether the draft's claim matches them. When they are not supplied, flag rather than guess:
+
+- vague collective authorities (`experts`, `observers`, `research`);
+- exact dates, figures, studies, quotations, and names without a source;
+- generic significance claims that do not identify a consequence;
+- speculative detail following an acknowledged information gap.
+
 ## Output
 
 For `rewrite`, return clean revised text. Add a short note only when an edit changed claim scope or a material limitation was retained.
@@ -92,6 +125,8 @@ For `rewrite`, return clean revised text. Add a short note only when an edit cha
 For `audit`, group no more than eight findings under: **phrasing**, **structure**, **formatting**, and **precision**. Label them as signals, not proof of AI use.
 
 For `voice-match`, return the revision followed by up to three brief observations about the retained voice. Do not imitate a supplied sample beyond its observable style.
+
+For `source-safe`, return a concise issue list with: **claim or phrase**, **why it needs support**, and **safe edit or verification step**. Do not substitute an invented source or fact.
 
 ## Final Check
 
@@ -102,4 +137,5 @@ Before delivering, verify that the revision:
 - keeps material uncertainty and removes only defensive padding;
 - uses concrete actors, mechanisms, evidence, and consequences where available;
 - does not repeat a template structure, transition ladder, or symmetrical sentence shape;
+- leaves quotations, facts, citations, and technical content intact unless a change was explicitly requested;
 - preserves the intended register and reads like a person wrote it for this situation.

@@ -1,4 +1,4 @@
 interface:
   display_name: "De-AI Writing Editor"
-  short_description: "Make prose natural, direct, and evidence-calibrated"
-  default_prompt: "Use $de-ai-writing to remove AI-like phrasing and defensive writing while preserving my voice and factual precision."
+  short_description: "Make prose natural, direct, source-safe, and precise"
+  default_prompt: "Use $de-ai-writing to remove AI-like phrasing and defensive writing while preserving my voice, sources, and factual precision."
