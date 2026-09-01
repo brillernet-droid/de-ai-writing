@@ -15,6 +15,8 @@ Make the writing sound authored: specific, purposeful, rhythmically natural, and
 
 Do not optimise for detector scores. Do not fabricate anecdotes, citations, sources, personal details, quirks, or errors. Preserve all facts, numbers, technical terms, intended stance, and material uncertainty.
 
+This is the public skill edition of ToneKeep. It documents a lightweight writing workflow and must not include private production prompts, scoring weights, model-routing logic, user data, payment logic, or training samples.
+
 ## Modes
 
 - `rewrite` — default. Return a ready-to-use revision.
